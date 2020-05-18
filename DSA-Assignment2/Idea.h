@@ -25,6 +25,8 @@ public:
 	bool WordSearch(string word);
 	bool Validate();
 
+	//Delete this function before submitting
+	void Test();
 	void Print();
 private:
 	int id;

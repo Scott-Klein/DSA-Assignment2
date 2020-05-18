@@ -6,7 +6,10 @@
 
 int main()
 {
-    std::cout << "Hello World!\n";
+
     Idea hello = Idea();
+    hello.Test(); //Create test data.
+
+    hello.Print();
 }
 

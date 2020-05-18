@@ -8,7 +8,14 @@ class IdeasBank
 public:
 	IdeasBank()
 	{
-
+		if (ReadFile())
+		{
+			cout << "Read files from .txt" << endl;
+		}
+		else
+		{
+			cout << "Failed to read files from .txt" << endl;
+		}
 	}
 
 	bool IdeaInsertion(Idea idea);
@@ -18,5 +25,7 @@ public:
 
 private:
 	vector<Idea> ideas;
+
+	bool ReadFile();
 };
 

@@ -18,6 +18,29 @@ bool Idea::WordSearch(string word)
 	return false;
 }
 
+bool Idea::Validate()
+{
+	if (this->id > 0)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+void Idea::Print()
+{
+	cout << "idea id: " << id << endl;
+	cout << "proposer: " << proposer << endl;
+	for (int i = 0; i < keywords.size(); i++)
+	{
+		cout << keywords[i] << ", ";
+	}
+	cout << endl << content << endl;
+}
+
 bool Idea::KeywordSearch(string word)
 {
 	bool result = false;

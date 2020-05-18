@@ -17,8 +17,15 @@ public:
 		id = abs(id);
 	}
 
+	int GetId()
+	{
+		return this->id;
+	}
+
 	bool WordSearch(string word);
-protected:
+	bool Validate();
+
+	void Print();
 private:
 	int id;
 	string proposer;

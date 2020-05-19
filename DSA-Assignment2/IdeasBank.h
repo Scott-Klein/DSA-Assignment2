@@ -2,6 +2,9 @@
 
 #include <vector>
 #include "Idea.h"
+#include "AVL_ADT.h"
+#include "Index.h"
+
 using namespace std;
 class IdeasBank
 {
@@ -25,7 +28,7 @@ public:
 
 private:
 	vector<Idea> ideas;
-
+	AvlTree<Index, string> indices;
 	bool ReadFile();
 };
 

@@ -157,6 +157,7 @@
     <ClInclude Include="Helper.h" />
     <ClInclude Include="Idea.h" />
     <ClInclude Include="IdeasBank.h" />
+    <ClInclude Include="Index.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\ideasbank.txt" />

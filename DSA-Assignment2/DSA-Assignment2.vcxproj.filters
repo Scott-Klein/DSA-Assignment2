@@ -21,10 +21,29 @@
     <ClCompile Include="Idea.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="IdeasBank.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Idea.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="IdeasBank.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Constants.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Helper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AVL_ADT.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\ideasbank.txt" />
+    <Text Include="..\tits.txt" />
   </ItemGroup>
 </Project>

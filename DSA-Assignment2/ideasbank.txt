@@ -1,0 +1,24 @@
+#id# 1
+#proposer# 	Dongmo Zhang
+#keywords#  smartphone technology chickens cats
+#content#	Combine samsung s-pen with earphone and microphone.
+#end#
+
+#id# 2
+#proposer# 	ideaaday.org
+#keywords#  publication weather
+#content#	Publish the average daily global temperature.
+#end#
+
+#id# 3
+#proposer# 	oneideaaday.tumblr.com
+#keywords#  subway business
+#content#	Redesign each iconic subway maps of the major cities by replacing stations with the SubwayƠs restaurants nearby.
+#end#
+
+#id# 4
+#proposer# 	ideaaday.org
+#keywords#  TV program education   
+#content#	Launch an educational early evening kidsƠ TV show called A+ which recaps what the 
+kids will have learned at school that day.
+#end#

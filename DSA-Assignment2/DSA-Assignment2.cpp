@@ -3,13 +3,13 @@
 
 #include <iostream>
 #include "Idea.h"
+#include <fstream>
+#include <string>
+#include "IdeasBank.h"
 
 int main()
 {
-
-    Idea hello = Idea();
-    hello.Test(); //Create test data.
-
-    hello.Print();
+    IdeasBank bank = IdeasBank();
+    bank.IdeaPrintAll();
 }
 

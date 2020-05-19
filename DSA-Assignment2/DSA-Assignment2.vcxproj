@@ -152,8 +152,15 @@
     <ClCompile Include="IdeasBank.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AVL_ADT.h" />
+    <ClInclude Include="Constants.h" />
+    <ClInclude Include="Helper.h" />
     <ClInclude Include="Idea.h" />
     <ClInclude Include="IdeasBank.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\ideasbank.txt" />
+    <Text Include="..\tits.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

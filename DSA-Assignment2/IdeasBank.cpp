@@ -1,5 +1,7 @@
 #include "IdeasBank.h"
 #include <fstream>
+#include "Constants.h"
+#include "Helper.h"
 
 bool IdeasBank::IdeaInsertion(Idea idea)
 {
@@ -59,12 +61,44 @@ void IdeasBank::IdeaPrintAll()
 
 bool IdeasBank::ReadFile()
 {
-	ifstream infile{ "ideas.txt" };
+	ifstream infile{ "ideasbank.txt" };
+	int id;
+	string line, proposer, content;
+	vector<string> keywords;
 
-	if (infile)
+	while (infile >> line)
 	{
-		
+		if (line == "#id#")
+		{
+			getline(infile, line);
+			id = stoi(line);
+		}
+		else if (line == PROPOSER_TAG)
+		{
+			getline(infile, line);
+			TrimWhiteSpace(&line);
+			proposer = line;
+		}
+		else if (line == "#keywords#")
+		{
+			getline(infile, line);
+			keywords = VectoriseString(line, " ");
+		}
+		else if (line == "#content#")
+		{
+			getline(infile, line);
+			TrimWhiteSpace(&line);
+			content = line;
+		}
+		else if (line == "#end#")
+		{
+			Idea idea = Idea(id, proposer, content, keywords);
+			ideas.push_back(idea);
+		}
 	}
 
-	return false;
+	infile.close();
+
+	return true;
 }
+

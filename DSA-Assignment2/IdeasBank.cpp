@@ -8,6 +8,13 @@ bool IdeasBank::IdeaInsertion(Idea idea)
 	if (idea.Validate())
 	{
 		ideas.push_back(idea);
+		Index index;
+		auto keywords = idea.GetKeywords();
+		for (int i = 0; i < keywords.size(); i++)
+		{
+
+		}
+		//indices.AVL_Insert()
 		return true;
 	}
 	else

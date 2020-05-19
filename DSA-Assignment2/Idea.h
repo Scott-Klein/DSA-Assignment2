@@ -16,10 +16,12 @@ public:
 		id = idHash(time(NULL));
 		id = abs(id);
 	}
+
 	Idea(int id)
 	{
 		this->id = id;
 	}
+
 	Idea(int id, string proposer, string content, vector<string> keywords)
 	{
 		this->id = id;
@@ -27,6 +29,7 @@ public:
 		this->content = content;
 		this->keywords = keywords;
 	}
+
 	int GetId()
 	{
 		return this->id;
@@ -51,8 +54,7 @@ public:
 
 	bool Validate();
 
-	//Delete this function before submitting
-	void Test();
+
 	void Print();
 private:
 	int id;

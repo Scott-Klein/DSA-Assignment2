@@ -34,8 +34,13 @@ public:
 	{
 		return this->id;
 	}
+	
+	string GetContent()
+	{
+		return this->content;
+	}
 
-	bool WordSearch(string word);
+	
 
 	void SetProposer(string inProposer)
 	{
@@ -46,15 +51,19 @@ public:
 	{
 		this->keywords = inVector;
 	}
-
+	vector<string> GetKeywords()
+	{
+		return this->keywords;
+	}
 	void SetContent(string inContent)
 	{
 		this->content = inContent;
 	}
 
 	bool Validate();
-
-
+	bool WordSearch(string word);
+	bool ContentSearch(string word);
+	bool KeywordSearch(string word);
 	void Print();
 private:
 	int id;
@@ -62,7 +71,7 @@ private:
 	vector<string> keywords;
 	string content;
 
-	bool KeywordSearch(string word);
-	bool ContentSeaerch(string word);
+	
+	
 };
 

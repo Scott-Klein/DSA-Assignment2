@@ -30,6 +30,7 @@ bool Idea::Validate()
 	}
 }
 
+
 void Idea::Print()
 {
 	cout << "idea id: " << id << endl;
@@ -59,7 +60,7 @@ bool Idea::KeywordSearch(string word)
 	return result;
 }
 
-bool Idea::ContentSeaerch(string word)
+bool Idea::ContentSearch(string word)
 {
 	bool result = false;
 	if (content.find(word) != string::npos)

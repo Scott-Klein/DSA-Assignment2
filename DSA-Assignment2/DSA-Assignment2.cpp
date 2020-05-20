@@ -11,5 +11,11 @@ int main()
 {
     IdeasBank bank = IdeasBank();
     bank.IdeaPrintAll();
+	cout << endl;
+	while (true)
+	{
+		bank.UserWordSearch();
+		cout << endl;
+	}
 }
 

@@ -13,6 +13,7 @@ public:
 	{
 		if (ReadFile())
 		{
+			UpdateIndex();
 			cout << "Read files from .txt" << endl;
 		}
 		else
@@ -25,10 +26,16 @@ public:
 	void IdeaPrint(int id);
 	bool IdeaErase(int id);
 	void IdeaPrintAll();
-
+	void UserWordSearch();
+	void TestTreeUpdating();
 private:
 	vector<Idea> ideas;
 	AvlTree<Index, string> indices;
 	bool ReadFile();
+	void UpdateIndex();
+	bool IdeaFind(int id);
+
+	vector<int> KeywordSearch(string word);
+	vector<int> IndexSearch(string word);
 };
 

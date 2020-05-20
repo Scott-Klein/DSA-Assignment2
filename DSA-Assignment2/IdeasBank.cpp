@@ -8,18 +8,13 @@ bool IdeasBank::IdeaInsertion(Idea idea)
 	if (idea.Validate())
 	{
 		ideas.push_back(idea);
-		Index index;
-		auto keywords = idea.GetKeywords();
-		for (int i = 0; i < keywords.size(); i++)
-		{
 
-		}
-		//indices.AVL_Insert()
+		UpdateIndex();
 		return true;
 	}
 	else
 	{
-		return false;
+		return false; // idea is not valid, let caller know that it wasn't inserted
 	}
 }
 
@@ -42,18 +37,23 @@ void IdeasBank::IdeaPrint(int id)
 
 bool IdeasBank::IdeaErase(int id)
 {
+	bool result = false;
 	auto iterator = ideas.begin();
 	while (iterator != ideas.end())
 	{
 		if (iterator->GetId() == id)
 		{
 			ideas.erase(iterator);
-			return true; // Item was found and deleted successfully.
+			result = true; // Item was found and deleted successfully.
 		}
 		iterator++;
 	}
-	// Item not found, nothing was erased.
-	return false;
+
+	if (result)
+	{
+		UpdateIndex(); // We erased something, update the index.
+	}
+	return result;
 }
 
 void IdeasBank::IdeaPrintAll()
@@ -64,6 +64,41 @@ void IdeasBank::IdeaPrintAll()
 		iterator->Print();
 		iterator++;
 	}
+}
+
+void IdeasBank::UserWordSearch()
+{
+	string input;
+	cout << "Search term : ";
+	cin >> input;
+	auto resultByKeywords = KeywordSearch(input);
+	auto resultByIndex = IndexSearch(input);
+
+	auto searchKeywords = resultByKeywords.begin();
+	cout << "Printing keyword results: \n";
+	while (searchKeywords != resultByKeywords.end())
+	{
+		IdeaPrint(*searchKeywords++);
+	}
+	auto searchIndex = resultByIndex.begin();
+	cout << "Printing related items: \n";
+	while (searchIndex != resultByIndex.end())
+	{
+		IdeaPrint(*searchIndex++);
+	}
+}
+
+void IdeasBank::TestTreeUpdating()
+{
+	Index index;
+	string tested = "weather";
+	indices.AVL_Retrieve(tested, index);
+	cout << "\n" << tested << " is in idea ID ";
+	for (int i = 0; i < index.idList.size(); i++)
+	{
+		cout << index.idList[i] << ", ";
+	}
+	cout << endl;
 }
 
 bool IdeasBank::ReadFile()
@@ -107,5 +142,86 @@ bool IdeasBank::ReadFile()
 	infile.close();
 
 	return true;
+}
+
+void IdeasBank::UpdateIndex()
+{
+
+	auto ideaIterator = ideas.begin();
+	while (ideaIterator != ideas.end())
+	{
+		string contents = ideaIterator++->GetContent();
+		while (contents != "")
+		{
+			Index index;
+			string key = GetWord(&contents);
+			if (!indices.AVL_Retrieve(key, index))
+			{
+				index.key = key;
+
+				for (int j = 0; j < ideas.size(); j++)
+				{
+					if (ideas[j].ContentSearch(index.key) && !IdInSet(index.idList, ideas[j].GetId()) && !ideas[j].KeywordSearch(index.key))
+					{
+						index.idList.push_back(ideas[j].GetId());
+					}
+				}
+
+				//remove any idea ids from idLists that don't exist in the bank anymore.
+				auto idIt = index.idList.begin();
+				while (idIt != index.idList.end())
+				{
+					if (!IdeaFind(*idIt))
+					{
+						index.idList.erase(idIt);
+					}
+					idIt++;
+				}
+
+				// try updating record first, if no record, insert it.
+				if (!indices.AVL_Update(index.key, index))
+				{
+					indices.AVL_Insert(index);
+				}
+			}
+		}
+	}
+
+}
+
+bool IdeasBank::IdeaFind(int id)
+{
+	for (int i = 0; i < ideas.size(); i++)
+	{
+		if (id == ideas[i].GetId())
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+vector<int> IdeasBank::KeywordSearch(string word)
+{
+	vector<int> result;
+	for (int i = 0; i < ideas.size(); i++)
+	{
+		if (ideas[i].KeywordSearch(word))
+		{
+			result.push_back(ideas[i].GetId());
+		}
+	}
+	return result;
+}
+
+vector<int> IdeasBank::IndexSearch(string word)
+{
+	vector<int> result;
+	Index index;
+	if (indices.AVL_Retrieve(word, index))
+	{
+		result = index.idList;
+	}
+	return result;
 }
 

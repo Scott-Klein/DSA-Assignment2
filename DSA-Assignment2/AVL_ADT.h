@@ -2,6 +2,8 @@
 #define LH +1 // Left High
 #define EH 0  // Even High
 #define RH -1 // Right High
+#include <iomanip>
+
 
 // 	NODE Definitions
 template <class TYPE>
@@ -22,7 +24,6 @@ protected:
     NODE<TYPE> *tree;
 
     NODE<TYPE> *_insert(NODE<TYPE> *root, NODE<TYPE> *newPtr, bool &taller);
-
     NODE<TYPE> *leftBalance(NODE<TYPE> *root, bool &taller);
 
     NODE<TYPE> *rotateLeft(NODE<TYPE> *root);
@@ -45,6 +46,7 @@ public:
     AvlTree(void);
     ~AvlTree(void);
     bool AVL_Insert(TYPE dataIn);
+    bool AVL_Update(KTYPE key, TYPE dataIn);
     bool AVL_Delete(KTYPE dltKey);
     bool AVL_Retrieve(KTYPE key, TYPE &dataOut);
     void AVL_Traverse(void (*process)(TYPE dataProc)); //in-order
@@ -97,6 +99,17 @@ bool AvlTree<TYPE, KTYPE>::AVL_Insert(TYPE dataIn)
     count++;
     return true;
 } //  Avl_Insert
+
+
+template<class TYPE, class KTYPE>
+inline bool AvlTree<TYPE, KTYPE>::AVL_Update(KTYPE key, TYPE dataIn)
+{
+    if (!AVL_Delete(key) || !AVL_Insert(dataIn))
+    {
+        return false;
+    }
+    return true;
+}
 
 /*	======================= _insert =======================
     This function uses recursion to insert the new data into

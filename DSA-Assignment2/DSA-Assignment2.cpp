@@ -52,5 +52,16 @@ int Menu()
 	cout << MENU_6 << endl;
 	int input;
 	cin >> input;
+
+	if (cin.fail())
+	{
+		while (cin.fail())
+		{
+			// get rid of failure state
+			cin.clear();
+			cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+			cin >> input;
+		}
+	}
 	return input;
 }

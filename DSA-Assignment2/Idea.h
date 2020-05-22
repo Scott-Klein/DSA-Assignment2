@@ -37,7 +37,12 @@ public:
 	
 	string GetContent()
 	{
-		return this->content;
+		string result = content;
+		for (int i = 0; i < keywords.size(); i++)
+		{
+			result += " " + keywords[i];
+		}
+		return result;
 	}
 
 	void SetProposer(string inProposer)

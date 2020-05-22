@@ -37,7 +37,12 @@ private:
 	void UpdateIndex();
 	bool IdeaFind(int id);
 
-	vector<int> KeywordSearch(string word);
+
+	void WordSearch(string input);
+	void WordSearch(vector<string> input);
+
+	bool LogicalOp(vector <string> words, Idea idea);
 	vector<int> IndexSearch(string word);
+	vector<int> IndexSearch(vector<string> words);
 };
 

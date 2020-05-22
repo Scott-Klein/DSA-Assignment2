@@ -33,7 +33,7 @@ bool Idea::Validate()
 
 void Idea::Print()
 {
-	cout << "idea id: " << id << endl;
+	cout << endl << "idea id: " << id << endl;
 	cout << "proposer: " << proposer << endl;
 	cout << "keywords: ";
 	for (int i = 0; i < keywords.size(); i++)

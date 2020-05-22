@@ -27,7 +27,9 @@ public:
 	bool IdeaErase(int id);
 	void IdeaPrintAll();
 	void UserWordSearch();
+	void UserIndexSearch();
 	void TestTreeUpdating();
+	void PrintIndex();
 private:
 	vector<Idea> ideas;
 	AvlTree<Index, string> indices;

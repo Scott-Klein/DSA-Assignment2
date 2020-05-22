@@ -40,8 +40,6 @@ public:
 		return this->content;
 	}
 
-	
-
 	void SetProposer(string inProposer)
 	{
 		this->proposer = inProposer;

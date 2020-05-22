@@ -64,24 +64,32 @@ void IdeasBank::IdeaPrintAll()
 		iterator->Print();
 		iterator++;
 	}
+	cout << endl;
 }
 
 void IdeasBank::UserWordSearch()
 {
 	string input;
+	cout << MENU_INPUT_TERM;
+	cin >> input;
+	cout << MENU_WORD_SEARCH << endl;
+	for (int i = 0; i < ideas.size(); i++)
+	{
+		if (ideas[i].WordSearch(input))
+		{
+			IdeaPrint(ideas[i].GetId());
+		}
+	}
+}
+
+void IdeasBank::UserIndexSearch()
+{
+	string input;
 	cout << "Search term : ";
 	cin >> input;
-	auto resultByKeywords = KeywordSearch(input);
 	auto resultByIndex = IndexSearch(input);
-
-	auto searchKeywords = resultByKeywords.begin();
-	cout << "Printing keyword results: \n";
-	while (searchKeywords != resultByKeywords.end())
-	{
-		IdeaPrint(*searchKeywords++);
-	}
 	auto searchIndex = resultByIndex.begin();
-	cout << "Printing related items: \n";
+	cout << MENU_INDEX_SEARCH << endl;
 	while (searchIndex != resultByIndex.end())
 	{
 		IdeaPrint(*searchIndex++);
@@ -101,6 +109,11 @@ void IdeasBank::TestTreeUpdating()
 	cout << endl;
 }
 
+void IdeasBank::PrintIndex()
+{
+	indices.AVL_Print();
+}
+
 bool IdeasBank::ReadFile()
 {
 	ifstream infile{ "ideasbank.txt" };
@@ -110,29 +123,29 @@ bool IdeasBank::ReadFile()
 
 	while (infile >> line)
 	{
-		if (line == "#id#")
+		if (line == TAG_ID)
 		{
 			getline(infile, line);
 			id = stoi(line);
 		}
-		else if (line == PROPOSER_TAG)
+		else if (line == TAG_PROPOSER)
 		{
 			getline(infile, line);
 			TrimWhiteSpace(&line);
 			proposer = line;
 		}
-		else if (line == "#keywords#")
+		else if (line == TAG_KEYWORDS)
 		{
 			getline(infile, line);
 			keywords = VectoriseString(line, " ");
 		}
-		else if (line == "#content#")
+		else if (line == TAG_CONTENTS)
 		{
 			getline(infile, line);
 			TrimWhiteSpace(&line);
 			content = line;
 		}
-		else if (line == "#end#")
+		else if (line == TAG_END)
 		{
 			Idea idea = Idea(id, proposer, content, keywords);
 			ideas.push_back(idea);
@@ -146,7 +159,6 @@ bool IdeasBank::ReadFile()
 
 void IdeasBank::UpdateIndex()
 {
-
 	auto ideaIterator = ideas.begin();
 	while (ideaIterator != ideas.end())
 	{
@@ -161,7 +173,7 @@ void IdeasBank::UpdateIndex()
 
 				for (int j = 0; j < ideas.size(); j++)
 				{
-					if (ideas[j].ContentSearch(index.key) && !IdInSet(index.idList, ideas[j].GetId()) && !ideas[j].KeywordSearch(index.key))
+					if (ideas[j].ContentSearch(index.key) && !IdInSet(index.idList, ideas[j].GetId()))
 					{
 						index.idList.push_back(ideas[j].GetId());
 					}

@@ -14,7 +14,6 @@ void TrimWhiteSpace(string* toTrim)
 			*toTrim = toTrim->substr(0, toTrim->length() - 1);
 		}
 	}
-
 }
 
 bool IdInSet(vector<int> vec, int id)
